@@ -47,7 +47,7 @@ jobs:
       - name: Build and Push Spark-Operator Docker Image to github container registry
         run: |
           DOCKER_TAG=$(cat charts/spark-operator-chart/Chart.yaml | grep "appVersion: .*" | cut -c13-)
-          docker build --build-arg="apache/spark:3.4.0" -t ghcr.io/junaidk/spark-operator:${DOCKER_TAG} .
+          docker build -t ghcr.io/junaidk/spark-operator:${DOCKER_TAG} .
           echo "Ideally, we'd release the docker container at this point, but the maintainer of this repo needs to approve..."
 
           if ! docker pull ghcr.io/junaidk/spark-operator:${DOCKER_TAG}; then
